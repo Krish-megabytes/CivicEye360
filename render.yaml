@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: civiceye-360
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_ORIGIN
+        sync: false
+      - key: COOKIE_SECURE
+        value: "true"
+      # Optional: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM, OPENAI_API_KEY

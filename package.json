@@ -1,0 +1,33 @@
+{
+  "name": "civiceye-360",
+  "version": "2.0.0",
+  "private": true,
+  "description": "CivicEye 360 — AI-assisted civic issue reporting, triage and resolution platform",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n mongo,api,web -c yellow,cyan,green \"npm:dev:mongo\" \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:mongo": "node scripts/mongo-dev.mjs",
+    "dev:server": "npm --workspace server run dev",
+    "dev:client": "npm --workspace client run dev",
+    "build": "npm --workspace server run build && npm --workspace client run build",
+    "start": "npm --workspace server run start",
+    "seed": "npm --workspace server run seed",
+    "seed:reset": "npm --workspace server run seed -- --reset",
+    "test": "npm --workspace server run test && npm --workspace client run test",
+    "test:server": "npm --workspace server run test",
+    "test:client": "npm --workspace client run test",
+    "typecheck": "npm --workspace server run typecheck && npm --workspace client run typecheck",
+    "lint": "npm --workspace server run lint && npm --workspace client run lint",
+    "format": "prettier --write \"{server,client}/src/**/*.{ts,tsx,css}\" \"*.md\" \"docs/**/*.md\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.5",
+    "prettier": "^3.9.10"
+  }
+}
